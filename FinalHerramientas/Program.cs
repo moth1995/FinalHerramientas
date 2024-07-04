@@ -1,6 +1,6 @@
 using FinalHerramientas.Data;
 using Microsoft.EntityFrameworkCore;
-
+using FinalHerramientas.Models;
 namespace FinalHerramientas
 {
     public class Program
@@ -12,9 +12,9 @@ namespace FinalHerramientas
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("VinotecaDBConnection") ?? throw new InvalidOperationException("Connection string 'VinotecaDBConnection' not found.");
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<VinotecaDbContext>(options =>
             {
                 options.UseSqlServer(connectionString);
             });
