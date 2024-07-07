@@ -1,9 +1,10 @@
 ﻿using FinalHerramientas.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FinalHerramientas.Data
 {
-    public class VinotecaDbContext : DbContext
+    public class VinotecaDbContext : IdentityDbContext
     {
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Bodega> Bodegas { get; set; }
@@ -15,6 +16,7 @@ namespace FinalHerramientas.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Cliente>()
                 .HasMany(c => c.Despachos)
                 .WithOne(d => d.Cliente)
