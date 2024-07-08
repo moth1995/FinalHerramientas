@@ -1,8 +1,9 @@
 using FinalHerramientas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using FinalHerramientas.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+
 namespace FinalHerramientas
 {
     public class Program
@@ -22,8 +23,9 @@ namespace FinalHerramientas
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IBodegaService, BodegaService>();
+            builder.Services.AddScoped<IVinoService, VinoService>();
             builder.Services.AddRazorPages();
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -46,7 +48,7 @@ namespace FinalHerramientas
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
-            
+
             app.Run();
         }
     }

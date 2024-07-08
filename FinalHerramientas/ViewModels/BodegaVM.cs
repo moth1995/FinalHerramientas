@@ -1,13 +1,11 @@
-﻿namespace FinalHerramientas.Models
+﻿namespace FinalHerramientas.ViewModels
 {
-    public class Bodega
+    public class BodegaVM
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Pais { get; set; }
         public string Region { get; set; }
 
-        public virtual List<Vino>? Vinos { get; set; }
     }
-
 }

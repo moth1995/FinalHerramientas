@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalHerramientas.Migrations
 {
     [DbContext(typeof(VinotecaDbContext))]
-    [Migration("20240707221037_InitialCreate")]
+    [Migration("20240708194218_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -43,44 +43,10 @@ namespace FinalHerramientas.Migrations
                     b.ToTable("Bodegas");
                 });
 
-            modelBuilder.Entity("FinalHerramientas.Models.Cliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CorreoElectronico")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Clientes");
-                });
-
             modelBuilder.Entity("FinalHerramientas.Models.Despacho", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ClienteID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Estado")
@@ -90,12 +56,14 @@ namespace FinalHerramientas.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("Total")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClienteID");
 
                     b.ToTable("Despachos");
                 });
@@ -351,17 +319,6 @@ namespace FinalHerramientas.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FinalHerramientas.Models.Despacho", b =>
-                {
-                    b.HasOne("FinalHerramientas.Models.Cliente", "Cliente")
-                        .WithMany("Despachos")
-                        .HasForeignKey("ClienteID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
-                });
-
             modelBuilder.Entity("FinalHerramientas.Models.DetalleDespacho", b =>
                 {
                     b.HasOne("FinalHerramientas.Models.Despacho", "Despacho")
@@ -446,11 +403,6 @@ namespace FinalHerramientas.Migrations
             modelBuilder.Entity("FinalHerramientas.Models.Bodega", b =>
                 {
                     b.Navigation("Vinos");
-                });
-
-            modelBuilder.Entity("FinalHerramientas.Models.Cliente", b =>
-                {
-                    b.Navigation("Despachos");
                 });
 
             modelBuilder.Entity("FinalHerramientas.Models.Despacho", b =>

@@ -66,20 +66,19 @@ namespace FinalHerramientas.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clientes",
+                name: "Despachos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Nombre = table.Column<string>(type: "TEXT", nullable: false),
-                    Apellido = table.Column<string>(type: "TEXT", nullable: false),
-                    CorreoElectronico = table.Column<string>(type: "TEXT", nullable: false),
-                    Telefono = table.Column<string>(type: "TEXT", nullable: false),
-                    Direccion = table.Column<string>(type: "TEXT", nullable: false)
+                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Estado = table.Column<string>(type: "TEXT", nullable: false),
+                    Total = table.Column<decimal>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                    table.PrimaryKey("PK_Despachos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -213,28 +212,6 @@ namespace FinalHerramientas.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Despachos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ClienteID = table.Column<int>(type: "INTEGER", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Estado = table.Column<string>(type: "TEXT", nullable: false),
-                    Total = table.Column<decimal>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Despachos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Despachos_Clientes_ClienteID",
-                        column: x => x.ClienteID,
-                        principalTable: "Clientes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DetalleDespachos",
                 columns: table => new
                 {
@@ -299,11 +276,6 @@ namespace FinalHerramientas.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Despachos_ClienteID",
-                table: "Despachos",
-                column: "ClienteID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Vinos_BodegaID",
                 table: "Vinos",
                 column: "BodegaID");
@@ -341,9 +313,6 @@ namespace FinalHerramientas.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vinos");
-
-            migrationBuilder.DropTable(
-                name: "Clientes");
 
             migrationBuilder.DropTable(
                 name: "Bodegas");

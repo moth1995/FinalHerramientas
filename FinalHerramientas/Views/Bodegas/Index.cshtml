@@ -1,0 +1,58 @@
+﻿@model FinalHerramientas.ViewModels.BodegaListVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    <form method="get" asp-action="Index" asp-controller="Bodegas">
+        <div class="col-6 form-group">
+            <input class="form-control" asp-for="Filter">
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit"> Buscar </button>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bodegas[0].Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bodegas[0].Pais)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bodegas[0].Region)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Bodegas) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

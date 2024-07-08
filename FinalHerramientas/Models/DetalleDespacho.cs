@@ -8,8 +8,8 @@
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
 
-        public Despacho Despacho { get; set; }
-        public Vino Vino { get; set; }
+        public virtual Despacho Despacho { get; set; }
+        public virtual Vino Vino { get; set; }
     }
 
 }

@@ -6,7 +6,6 @@ namespace FinalHerramientas.Data
 {
     public class VinotecaDbContext : IdentityDbContext
     {
-        public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Bodega> Bodegas { get; set; }
         public DbSet<Vino> Vinos { get; set; }
         public DbSet<Despacho> Despachos { get; set; }
@@ -16,12 +15,6 @@ namespace FinalHerramientas.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Cliente>()
-                .HasMany(c => c.Despachos)
-                .WithOne(d => d.Cliente)
-                .HasForeignKey(d => d.ClienteID);
-
             modelBuilder.Entity<Bodega>()
                 .HasMany(b => b.Vinos)
                 .WithOne(v => v.Bodega)
@@ -36,6 +29,8 @@ namespace FinalHerramientas.Data
                 .HasMany(d => d.DetalleDespachos)
                 .WithOne(dd => dd.Despacho)
                 .HasForeignKey(dd => dd.Id);
+            base.OnModelCreating(modelBuilder);
+
         }
     }
 }
